@@ -54,10 +54,10 @@ class Search extends Component {
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
               <li className="nav-item active">
-                <Link to="/">
-                  <a className="nav-link" href="#">
+                <Link to="/" className="nav-link">
+                  {/* <a className="nav-link" href="#"> */}
                     Home <span className="sr-only">(current)</span>
-                  </a>
+                  {/* </a> */}
                 </Link>
               </li>
               <li className="nav-item">

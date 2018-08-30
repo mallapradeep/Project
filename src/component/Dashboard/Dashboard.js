@@ -5,6 +5,7 @@ import blazer from '../../img/blazer.jpg';
 import denim from '../../img/denim1.jpg';
 import combo from '../../img/combo.jpg';
 import shop from '../../img/shop.jpg';
+import './Dashboard.css';
 
 
 
@@ -12,7 +13,9 @@ export default class Dashboard extends Component {
   render() {
     return (
       <div>
-        
+          <div className="hero-title">
+            <h1 className="display-2">Welcome to IBIZA</h1>
+          </div>
     
        
                           <div id="carouselExampleIndicators"  className="carousel slide" data-ride="carousel">
@@ -42,14 +45,14 @@ export default class Dashboard extends Component {
                                   <span  className="sr-only">Next</span>
                                 </a>
                               </div>
-                <style>
+                
                   <body className="body">
                     <div className="box1">Box1</div>
                     <div className="box2">Box2</div>
                     <div className="box3">Box3</div>
                   </body>
                  
-                </style>
+                
       </div>
     )
   }

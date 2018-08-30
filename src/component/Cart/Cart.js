@@ -20,7 +20,7 @@ class Cart extends Component {
     let mappedCart = this.props.cart.map((product, i) => {
       console.log(product.id);
       return (
-        <div className="cart" key={product.id}>
+        <div className="cart" key={product.product_id}>
           <th scope="row">{i + 1}</th>
 
           <td>
@@ -67,7 +67,7 @@ class Cart extends Component {
         </table>
 
         <Link to="/stripe">
-          <button type="button" class="btn btn-success">
+          <button type="button" className="btn btn-success">
             Proceed To Checkout
           </button>
         </Link>

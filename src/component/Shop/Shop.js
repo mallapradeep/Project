@@ -37,7 +37,9 @@ class Shop extends Component {
 
   addToCart(obj) {
     this.props.addToCart(obj)
-    axios.post("/api/cart", { item:  obj  });
+    axios.post("/api/cart", obj );
+    console.log(obj);
+    
   }
 
   render() {
@@ -55,8 +57,11 @@ class Shop extends Component {
             <div>{item.description}</div>   
             <div>{item.price}</div>
 
+            <button onClick={() => this.addToCart( (item) )}>Add To Cart</button>
            
-            <button onClick={() => this.addToCart( item )}>Add To Cart</button>
+            {/* <button onClick={() => this.addToCart( {product_id : item.id} )}>Add To Cart</button> */}
+            {/* <button onClick={() => this.addToCart( {id: item.product_id} )}>Add To Cart</button> */}
+
               
             {/* <button><img src={add} width='30px' height='30px' onClick={() => this.props.addToCart( item, 'up' )} /></button> */}
           </div>

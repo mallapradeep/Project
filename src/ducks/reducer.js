@@ -4,7 +4,8 @@ const initialState = {
   cart: [],
   totalCost: 0,
   user: {},
-  name: ""
+  name: "",
+  description: ''
 };
 
 const ADD_TO_CART = "ADD_TO_CART";
@@ -12,11 +13,11 @@ const UPDATE_USER = "UPDATE_USER";
 const SEARCH_PRODUCT = "SEARCH_PRODUCT";
 const DELETE_PRODUCT = "DELETE_PRODUCT";
 
-export function addToCart(product, direction) {
+export function addToCart(product, direction, description) {
   let price = product.price;
   return {
     type: ADD_TO_CART,
-    payload: { product, price, direction }
+    payload: { product, price, direction, description }
   };
 }
 
@@ -46,7 +47,7 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case ADD_TO_CART:
       // const { cart } = state;
-       const { product, price, direction } = action.payload;
+       const { product, price, direction, description } = action.payload;
       // let newProduct = {},
       //   newCart = cart;
 

@@ -1,10 +1,12 @@
 module.exports = {
   add: (req, res, next) => {
     let dbInstance = req.app.get("db");
-    let { product_id, user_id, quantity } = req.body;
+    
+     let { product_id, user_id, quantity } = req.body;
+    console.log(req.body);
 
     dbInstance
-      .add_product([product_id, req.session.user.user_id, quantity])
+      .add_product([product_id, req.session.user.user_id, quantity ])
       .then(response => {
         console.log("product added");
         res.status(200).send(response);
