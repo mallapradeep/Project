@@ -3,12 +3,22 @@ import "./Cart.css";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Delete from "../../img/delete.png";
-import { deleteFromCart } from '../../ducks/reducer';
-
+import { deleteFromCart } from "../../ducks/reducer";
+import axios from "axios";
 
 class Cart extends Component {
+  constructor() {
+    super();
+  }
+  // deleteFromCart(id) {
+  //   console.log(id);
+  //   this.props.deleteFromCart(id);
+  //   axios.delete(`/api/cart/${id}`);
+  // }
+
   render() {
     let mappedCart = this.props.cart.map((product, i) => {
+      console.log(product.id);
       return (
         <div className="cart" key={product.id}>
           <th scope="row">{i + 1}</th>
@@ -23,7 +33,10 @@ class Cart extends Component {
           <th scope="col">Quantity</th>
 
           <td>{product.quantity}</td>
-          <button onClick={()=> this.props.deleteFromCart(product.id)}><img width="20px" height="20px" src={Delete} /></button>
+          <button onClick={() => this.props.deleteFromCart(product.product_id)}>
+            <img width="20px" height="20px" src={Delete} />
+
+          </button>
         </div>
       );
     });
@@ -72,4 +85,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {deleteFromCart})(Cart);
+export default connect(
+  mapStateToProps,
+  { deleteFromCart }
+)(Cart);

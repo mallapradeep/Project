@@ -16,10 +16,10 @@ create table users (
 --Carts Table
 create table carts (
     cart_id serial primary key,
-    Item varchar(40),
-    Price integer,
-    Quantity integer,
-    Total integer
+    product_id integer,
+    user_id integer,
+    quantity integer
+    
 )
 ------------------------
 
@@ -63,3 +63,9 @@ values( 'T-shirt','Red T-shirt', 'https://images.unsplash.com/photo-145688528444
 ( 'Shoe','Yeezy', 'https://images.unsplash.com/photo-1506026830518-84410c0a880f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6f3ff8066730c4ed77432b8bb953714c&auto=format&fit=crop&w=634&q=80', 200),
 ( 'backpack','Brown Leather Bag', 'https://images.unsplash.com/photo-1473188588951-666fce8e7c68?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1fbdbd814e90cfbe82efa4356abda205&auto=format&fit=crop&w=1440&q=80', 120);
 
+/////////////////
+
+select * from carts 
+join users on users.user_id = carts.user_id
+join products on products.product_id = carts.product_id
+where users.user_id = 1;

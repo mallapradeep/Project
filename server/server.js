@@ -3,7 +3,8 @@ require('dotenv').config();
 const express = require('express')
 , session = require('express-session')
 , massive = require('massive')
-, axios = require('axios');
+, axios = require('axios')
+ , bodyParser = require('body-parser');
 
 const cart_controller = require('./controllers/cart_controller');
 const auth_controller = require('./controllers/auth_controller');
@@ -13,6 +14,7 @@ const search_controller = require('./controllers/search_controller');
 
 //initialize express app
 const app = express();
+app.use(bodyParser.json());
 
 //destructure from process.env
 const { 
@@ -30,6 +32,9 @@ const {
 //db,db --> db is d key 
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db);
+    console.log('db connected')
+}).catch(err => {
+    console.log(err)
 })
 
 //middleware
@@ -41,9 +46,9 @@ app.use(session({
 
 //endpoints
 //cart
-app.post(`/api/cart`,cart_controller.add); //adds products to the cart
+app.post(`/api/cart`, cart_controller.add); //adds products to the cart
 app.put(`/api/cart`,cart_controller.update); //increase or decrease product
-app.delete(`/api/cart/`,cart_controller.delete); //deletes product from the cart
+app.delete(`/api/cart/:id`, cart_controller.delete); //deletes product from the cart
 
 //checkout
 // app.post(`/api/checkout`, cart_controller.checkout); //show products at chkout
@@ -52,6 +57,7 @@ app.delete(`/api/cart/`,cart_controller.delete); //deletes product from the cart
 
 // //products
 app.get(`/api/products`, products.getAll ); //displays the products at shop
+
 
 // //search
 app.get(`/api/search/:name`, search_controller.search); //display d product ur searchin for
