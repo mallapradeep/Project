@@ -46,6 +46,7 @@ app.use(session({
 
 //endpoints
 //cart
+app.get(`/api/cart`, cart_controller.get)
 app.post(`/api/cart`, cart_controller.add); //adds products to the cart
 app.put(`/api/cart`,cart_controller.update); //increase or decrease product
 app.delete(`/api/cart/:id`, cart_controller.delete); //deletes product from the cart

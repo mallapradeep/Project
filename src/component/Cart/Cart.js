@@ -9,18 +9,49 @@ import axios from "axios";
 class Cart extends Component {
   constructor() {
     super();
+
+    this.state = {
+      cart: []
+    }
   }
-  // deleteFromCart(id) {
-  //   console.log(id);
-  //   this.props.deleteFromCart(id);
-  //   axios.delete(`/api/cart/${id}`);
-  // }
+
+  componentDidMount(){
+    axios.get(`/api/cart`).then(res => {
+      console.log(res.data)
+      this.setState ({
+        cart: res.data
+    
+      })
+    }
+    )
+  }
+
+  deleteFromCart(id) {
+    console.log(id);
+    this.props.deleteFromCart(id);
+    axios.delete(`/api/cart/${id}`);
+  }
 
   render() {
-    let mappedCart = this.props.cart.map((product, i) => {
+
+    let newCart = []
+    for (var i = 0; i < this.state.cart.length; i++){
+        let flag = false
+        for (var j = 0; j < newCart.length;j++){
+            if(this.state.cart[i].product_id === newCart[j].product_id){
+                newCart[j].quantity++
+                flag = true
+            }
+        }
+        if(!flag){
+            newCart.push(Object.assign({},this.state.cart[i],{quantity:1}))
+        }
+    }
+
+    let mappedCart = newCart.map((product, i) => {
       console.log(product.id);
       return (
-        <div className="cart" key={product.product_id}>
+        <div className="cart" key={i}>
           <th scope="row">{i + 1}</th>
 
           <td>
@@ -33,7 +64,7 @@ class Cart extends Component {
           <th scope="col">Quantity</th>
 
           <td>{product.quantity}</td>
-          <button onClick={() => this.props.deleteFromCart(product.product_id)}>
+          <button onClick={() => this.deleteFromCart(product.cart_id)}>
             <img width="20px" height="20px" src={Delete} />
 
           </button>

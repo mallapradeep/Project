@@ -19,12 +19,12 @@ module.exports = {
 
   delete: (req, res, next) => {
     let dbInstance = req.app.get("db");
-    let product_id = req.params.id;
-    console.log(product_id);
+    let cart_id = req.params.id;
+    console.log(cart_id);
     console.log(req.params);
 
     dbInstance
-      .delete_product([product_id, req.session.user.user_id])
+      .delete_product([cart_id, req.session.user.user_id])
       .then(response => res.status(200).send(response))
       .catch(err => {
         res.status(500).send("Oops! Something went wrong.");
@@ -34,5 +34,21 @@ module.exports = {
 
   update: (req, res, next) => {
     const { id } = req.query;
+  },
+
+
+  get: (req, res, next) => {
+    let dbInstance = req.app.get("db");
+
+   dbInstance
+     .get_cart(req.session.user.user_id)
+     .then(response => {
+       console.log("retrieved cart");
+       res.status(200).send(response);
+     })
+     .catch(err => {
+       res.status(500).send("Oops! Something went wrong.");
+       console.log(err);
+     });
   }
 };

@@ -47,7 +47,7 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
     case ADD_TO_CART:
       // const { cart } = state;
-       const { product, price, direction, description } = action.payload;
+       const { product, price, direction } = action.payload;
       // let newProduct = {},
       //   newCart = cart;
 
