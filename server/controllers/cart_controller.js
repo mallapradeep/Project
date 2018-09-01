@@ -1,3 +1,7 @@
+require('dotenv').config();
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
+
+
 module.exports = {
   add: (req, res, next) => {
     let dbInstance = req.app.get("db");
@@ -32,11 +36,37 @@ module.exports = {
       });
   },
 
+  deleteLine: (req, res, next) => {
+    let dbInstance = req.app.get("db");
+    let product_id = req.params.id;
+    console.log('I git it');
+    console.log(req.params);
+
+    dbInstance
+      .delete_line([product_id, req.session.user.user_id])
+      .then(response => res.status(200).send(response))
+      .catch(err => {
+        res.status(500).send("Oops! Something went wrong.");
+        console.log(err);
+      });
+    },
+
   update: (req, res, next) => {
-    const { id } = req.query;
+    let dbInstance = req.app.get("db");
+    let cart_id = req.query.id;
+    console.log(cart_id);
+    console.log(req.query);
+
+    dbInstance
+      .update_product([cart_id, req.session.user.user_id, quantity])
+      .then(response => res.status(200).send(response))
+      .catch(err => {
+        res.status(500).send("Oops! Something went wrong.");
+        console.log(err);
+      });
   },
 
-
+//
   get: (req, res, next) => {
     let dbInstance = req.app.get("db");
 
@@ -50,5 +80,28 @@ module.exports = {
        res.status(500).send("Oops! Something went wrong.");
        console.log(err);
      });
-  }
+  },
+//Stripe
+  handlePayment: (req, res) => {
+    const { amount, token:{id}} = req.body
+    stripe.charges.create(
+        {
+            amount: amount,
+            currency: "usd",
+            source: id,
+            description: "Test charge from Travis"
+        },
+        (err, charge) => {
+            if(err) {
+                console.log(err)
+                return res.status(500).send(err)
+            } else {
+                console.log(charge)
+                return res.status(200).send(charge)
+            }
+        }
+    )
+}
+
+
 };

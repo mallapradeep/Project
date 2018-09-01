@@ -1,6 +1,14 @@
-/* .cart {
+.cart {
     text-align: center;
-    /* display: flex;
-   justify-content: left 
+     display: flex;
+   justify-content: space-between;
 }
- */
+
+
+ .quantity {
+     width: 30px;
+     height: 10px; 
+     border: 1px solid white;
+     box-sizing: border-box;
+
+ }

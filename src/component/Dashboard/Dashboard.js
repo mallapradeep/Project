@@ -14,7 +14,7 @@ export default class Dashboard extends Component {
     return (
       <div>
           <div className="hero-title">
-            <h1 className="display-2">Welcome to IBIZA</h1>
+            {/* <h1 className="display-2">Welcome to IBIZA</h1> */}
           </div>
     
        

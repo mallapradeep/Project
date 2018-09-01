@@ -11,6 +11,9 @@ const auth_controller = require('./controllers/auth_controller');
 const products = require('./controllers/products_controller');
 const search_controller = require('./controllers/search_controller');
 
+const stripe = require('stripe')(process.env.STRIPE_SECRET);
+
+
 
 //initialize express app
 const app = express();
@@ -24,7 +27,8 @@ const {
     REACT_APP_DOMAIN,
     CLIENT_SECRET,
     CONNECTION_STRING, 
-    NODE_ENV
+    NODE_ENV,
+    STRIPE_SECRET
     } = process.env 
 
 //DATABASE CONNECTION
@@ -48,11 +52,14 @@ app.use(session({
 //cart
 app.get(`/api/cart`, cart_controller.get)
 app.post(`/api/cart`, cart_controller.add); //adds products to the cart
-app.put(`/api/cart`,cart_controller.update); //increase or decrease product
+app.put(`/api/cart/:id`,cart_controller.update); //increase or decrease product
 app.delete(`/api/cart/:id`, cart_controller.delete); //deletes product from the cart
+app.delete(`/api/cartLine/:id`, cart_controller.deleteLine); 
+
+
 
 //checkout
-// app.post(`/api/checkout`, cart_controller.checkout); //show products at chkout
+app.post(`/api/checkout`, cart_controller.handlePayment); //show products at chkout
 
 
 

@@ -5,7 +5,7 @@ import Login from "./component/Login/Login";
 import Shop from "./component/Shop/Shop";
 import Cart from "./component/Cart/Cart";
 import Dashboard from "./component/Dashboard/Dashboard";
-import Stripe from "./component/Stripe/Stripe";
+import Checkout from "./component/Checkout/Checkout";
 import Private from "./component/Private/Private";
 
 export default (
@@ -14,7 +14,7 @@ export default (
     <Route component={Login} path="/login" />
     <Route component={Shop} path="/shop" />
     <Route component={Cart} path="/cart" />
-    <Route component={Stripe} path="/stripe" />
+    <Route component={Checkout} path="/checkout" />
     <Route path="/private" component={Private} />
 
   </Switch>

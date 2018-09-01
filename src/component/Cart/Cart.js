@@ -3,7 +3,7 @@ import "./Cart.css";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Delete from "../../img/delete.png";
-import { deleteFromCart } from "../../ducks/reducer";
+import { deleteFromCart, addToCart } from "../../ducks/reducer";
 import axios from "axios";
 
 class Cart extends Component {
@@ -12,46 +12,75 @@ class Cart extends Component {
 
     this.state = {
       cart: []
-    }
+    };
   }
 
-  componentDidMount(){
+  
+  componentDidMount() {
+   this.getCart()
+  }
+
+  getCart() {
     axios.get(`/api/cart`).then(res => {
-      console.log(res.data)
-      this.setState ({
+      console.log(res.data);
+      this.setState({
         cart: res.data
-    
-      })
-    }
-    )
+      });
+    });
   }
 
   deleteFromCart(id) {
     console.log(id);
     this.props.deleteFromCart(id);
-    axios.delete(`/api/cart/${id}`);
+    axios.delete(`/api/cartLine/${id}`).then(res => {
+      this.getCart()
+  });
+  }
+
+  // addToQuantity(id) {
+  //     this.props.addToCart(id);
+  //     axios.put(`/api/cart/${id}`);
+    
+    
+  addToQuantity(obj) {
+    this.props.addToCart(obj);
+    // axios.update("/api/cart", obj);
+    axios.post("/api/cart", obj).then(res => {
+        this.getCart()
+    })
+    console.log(obj);
+  }
+
+  deleteFromQuantity(id) {
+    console.log(id);
+    this.props.deleteFromCart(id);
+    axios.delete(`/api/cart/${id}`).then(res => {
+      this.getCart()
+  });
   }
 
   render() {
-
-    let newCart = []
-    for (var i = 0; i < this.state.cart.length; i++){
-        let flag = false
-        for (var j = 0; j < newCart.length;j++){
-            if(this.state.cart[i].product_id === newCart[j].product_id){
-                newCart[j].quantity++
-                flag = true
-            }
+    //updating quantity in my cart
+    let newCart = [];
+    for (var i = 0; i < this.state.cart.length; i++) {
+      let flag = false;
+      for (var j = 0; j < newCart.length; j++) {
+        if (this.state.cart[i].product_id === newCart[j].product_id) {
+          newCart[j].quantity++;
+          flag = true;
         }
-        if(!flag){
-            newCart.push(Object.assign({},this.state.cart[i],{quantity:1}))
-        }
+      }
+      if (!flag) {
+        newCart.push(Object.assign({}, this.state.cart[i], { quantity: 1 }));
+      }
     }
 
     let mappedCart = newCart.map((product, i) => {
       console.log(product.id);
       return (
         <div className="cart" key={i}>
+          <div>{i + 1}</div>
+
           <th scope="row">{i + 1}</th>
 
           <td>
@@ -62,11 +91,19 @@ class Cart extends Component {
           <td>${product.price}</td>
 
           <th scope="col">Quantity</th>
-
           <td>{product.quantity}</td>
-          <button onClick={() => this.deleteFromCart(product.cart_id)}>
-            <img width="20px" height="20px" src={Delete} />
 
+          <button onClick={() => this.addToQuantity(product)}>+</button>
+          
+          <div className="Quantity">{product.quantity}</div>
+          
+          <button onClick={() => this.deleteFromQuantity(product.cart_id)}>
+            -
+          </button>
+          
+
+          <button onClick={() => this.deleteFromCart(product.product_id)}>
+            <img width="20px" height="20px" src={Delete} />
           </button>
         </div>
       );
@@ -97,7 +134,7 @@ class Cart extends Component {
           </tbody>
         </table>
 
-        <Link to="/stripe">
+        <Link to="/checkout">
           <button type="button" className="btn btn-success">
             Proceed To Checkout
           </button>
@@ -118,5 +155,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { deleteFromCart }
+  { deleteFromCart, addToCart }
 )(Cart);
