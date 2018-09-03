@@ -1,0 +1,23 @@
+.category {
+    display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-flow: row nowrap;
+  height: 70%;
+  margin-top: 100px;
+}
+
+.tops-hero {
+  position: relative;
+}
+
+.tops-title {
+  color: white;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid white;
+  padding: 10px;
+}
+

@@ -14,11 +14,13 @@ export default class Dashboard extends Component {
     return (
       <div>
           <div className="hero-title">
-            {/* <h1 className="display-2">Welcome to IBIZA</h1> */}
+            <h6 className="display-1">JUST ARRIVED</h6>
+            <h1 className="display-2" >TROPICAL SUMMER</h1>
+            <button className='button'>VISIT SHOP</button>
           </div>
-    
-       
-                          <div id="carouselExampleIndicators"  className="carousel slide" data-ride="carousel">
+
+  
+  <div id="carouselExampleIndicators"  className="carousel slide" data-ride="carousel">
                                 <ol  className="carousel-indicators">
                                   <li data-target="#carouselExampleIndicators" data-slide-to="0"  className="active"></li>
                                   <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>

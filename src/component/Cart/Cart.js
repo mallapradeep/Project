@@ -15,9 +15,9 @@ class Cart extends Component {
     };
   }
 
-  
+  //componentDidMount gets d cart every time there is any changes in d page
   componentDidMount() {
-   this.getCart()
+    this.getCart();
   }
 
   getCart() {
@@ -33,21 +33,20 @@ class Cart extends Component {
     console.log(id);
     this.props.deleteFromCart(id);
     axios.delete(`/api/cartLine/${id}`).then(res => {
-      this.getCart()
-  });
+      this.getCart();
+    });
   }
 
   // addToQuantity(id) {
   //     this.props.addToCart(id);
   //     axios.put(`/api/cart/${id}`);
-    
-    
+
   addToQuantity(obj) {
     this.props.addToCart(obj);
     // axios.update("/api/cart", obj);
     axios.post("/api/cart", obj).then(res => {
-        this.getCart()
-    })
+      this.getCart();
+    });
     console.log(obj);
   }
 
@@ -55,8 +54,8 @@ class Cart extends Component {
     console.log(id);
     this.props.deleteFromCart(id);
     axios.delete(`/api/cart/${id}`).then(res => {
-      this.getCart()
-  });
+      this.getCart();
+    });
   }
 
   render() {
@@ -78,31 +77,27 @@ class Cart extends Component {
     let mappedCart = newCart.map((product, i) => {
       console.log(product.id);
       return (
-        <div className="cart" key={i}>
-          <div>{i + 1}</div>
+        <div className="cart py-5" key={i}>
+          {/* <div>{i + 1}</div> */}
+      
 
-          <th scope="row">{i + 1}</th>
+          <img src={product.image} className="cart-image" />
 
-          <td>
-            <img width="80px" height="80px" src={product.image} />
-          </td>
-
-          <th scope="col">Price</th>
-          <td>${product.price}</td>
-
-          <th scope="col">Quantity</th>
-          <td>{product.quantity}</td>
-
-          <button onClick={() => this.addToQuantity(product)}>+</button>
           
-          <div className="Quantity">{product.quantity}</div>
-          
-          <button onClick={() => this.deleteFromQuantity(product.cart_id)}>
+          <div className="cart-price">${product.price}</div>
+
+        
+          <div className="cart-quantity">{product.quantity}</div>
+
+          <button className="plus" onClick={() => this.addToQuantity(product)}>+</button>
+
+         
+
+          <button className="minus" onClick={() => this.deleteFromQuantity(product.cart_id)}>
             -
           </button>
-          
 
-          <button onClick={() => this.deleteFromCart(product.product_id)}>
+          <button className="delete-product" onClick={() => this.deleteFromCart(product.product_id)}>
             <img width="20px" height="20px" src={Delete} />
           </button>
         </div>
@@ -110,36 +105,22 @@ class Cart extends Component {
     });
 
     return (
-      <div className="cart">
-        <h1>SHOPPING CART</h1>
-        <br />
-
-        <table className="table table-dark " style={{ width: "38rem" }}>
-          {/* <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Item</th>
-              <th scope="col">Price</th>
-              <th scope="col">Quantity</th>
-              
-            </tr>
-          </thead> */}
-
-          <tbody>
-            <tr>
+          <div className="container cart-flow">
+            <div className="cart-container bg-dark">
+              <h6 className="product-title" >Product</h6>
+              <h6 className="product-price" >Price</h6>
+              <h6 className="product-quantity" >Quantity</h6>
+              <h6 className="product-total" >Total</h6>
+              </div>
               <div>{mappedCart}</div>
-              <th scope="col">Total</th>
-              <td>${this.props.totalCost}</td>
-            </tr>
-          </tbody>
-        </table>
+              <div className="cart-total">${this.props.totalCost}</div>
 
-        <Link to="/checkout">
-          <button type="button" className="btn btn-success">
-            Proceed To Checkout
-          </button>
-        </Link>
-      </div>
+              <Link to="/form">
+                <button type="button" className="btn btn-success">
+                  Proceed To Checkout
+                </button>
+              </Link>
+         </div>
     );
   }
 }

@@ -39,7 +39,7 @@ module.exports = {
   deleteLine: (req, res, next) => {
     let dbInstance = req.app.get("db");
     let product_id = req.params.id;
-    console.log('I git it');
+    console.log('I got it');
     console.log(req.params);
 
     dbInstance
@@ -66,7 +66,7 @@ module.exports = {
       });
   },
 
-//
+//displays d product in d cart
   get: (req, res, next) => {
     let dbInstance = req.app.get("db");
 
@@ -101,7 +101,40 @@ module.exports = {
             }
         }
     )
+},
+//adding account info to the db
+  save: (req, res, next) => {
+  let dbInstance = req.app.get("db");
+  
+   let { fullName, emailAddress, street, city, zip, state, phoneNumber } = req.body;
+  console.log(req.body);
+
+  dbInstance
+    .add_accountInfo([fullName, emailAddress, street, city, zip, state, phoneNumber ])
+    .then(response => {
+      console.log("info added");
+      res.status(200).send(response);
+    })
+    .catch(err => {
+      res.status(500).send("Oops! Something went wrong.");
+      console.log(err);
+    });
+
+
+},
+getInfo: (req, res, next) => {
+  let dbInstance = req.app.get("db");
+
+   dbInstance
+   .get_accountInfo()
+//    .get_accountInfo([req.session.user.user_id])
+   .then(response => {
+     console.log("retrieved info");
+     res.status(200).send(response);
+   })
+   .catch(err => {
+     res.status(500).send("Oops! Something went wrong.");
+     console.log(err);
+   });
+  }
 }
-
-
-};

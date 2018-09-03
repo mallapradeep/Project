@@ -50,17 +50,24 @@ app.use(session({
 
 //endpoints
 //cart
-app.get(`/api/cart`, cart_controller.get)
+app.get(`/api/cart`, cart_controller.get); //gets d cart list(whatever product is added)
 app.post(`/api/cart`, cart_controller.add); //adds products to the cart
 app.put(`/api/cart/:id`,cart_controller.update); //increase or decrease product
 app.delete(`/api/cart/:id`, cart_controller.delete); //deletes product from the cart
 app.delete(`/api/cartLine/:id`, cart_controller.deleteLine); 
 
+//accountInfo
+app.get(`/api/accountInfo`, cart_controller.getInfo);
+app.post(`/api/accountInfo`, cart_controller.save);
 
 
 //checkout
 app.post(`/api/checkout`, cart_controller.handlePayment); //show products at chkout
 
+//category
+app.get("/api/products/tops", products.getTops);
+app.get("/api/products/bottoms", products.getBottoms);
+app.get("/api/products/footwear", products.getFootwear);
 
 
 // //products
@@ -69,7 +76,6 @@ app.get(`/api/products`, products.getAll ); //displays the products at shop
 
 // //search
 app.get(`/api/search/:name`, search_controller.search); //display d product ur searchin for
-
 
 
 

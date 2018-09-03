@@ -42,22 +42,25 @@ class Shop extends Component {
     
   }
 
+
   render() {
     console.log(this.state.products);
+    //mapping over the products to display on shop
     let displayProducts = this.state.products.map((item, i) => {
       console.log(item);
       // const {id,  name, description, image, price } = product;
       return (
-        <div key={i} style={{ float: "left" }} className="shop">
+        
+        <div key={i} style={{ float: "left" }} className="shop card m-5">
           <Link to={`/product/${item.img}`}>
             <img width="300px" height="300px" src={item.image} alt="image" />
           </Link>
-          <div>
-            <div>{item.name}</div>
+          <div className="card-footer">
+            {/* <div>{item.name}</div> */}
             <div>{item.description}</div>   
-            <div>{item.price}</div>
+            <div>${item.price}</div>
 
-            <button onClick={() => this.addToCart( (item) )}>Add To Cart</button>
+            <button className="btn btn-success" onClick={() => this.addToCart( (item) )}>Add To Cart</button>
            
             {/* <button onClick={() => this.addToCart( {product_id : item.id} )}>Add To Cart</button> */}
             {/* <button onClick={() => this.addToCart( {id: item.product_id} )}>Add To Cart</button> */}

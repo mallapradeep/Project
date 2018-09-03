@@ -64,7 +64,7 @@ export default function reducer(state = initialState, action) {
       //   newProduct = product;
       //   newProduct.quantity = 1;
       //   newCart.push(newProduct);
-      // }
+      // }   
 
       return Object.assign({}, state, {
         // cart: newCart,
