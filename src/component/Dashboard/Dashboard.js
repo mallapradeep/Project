@@ -15,7 +15,7 @@ export default class Dashboard extends Component {
       <div>
           <div className="hero-title">
             <h6 className="display-1">JUST ARRIVED</h6>
-            <h1 className="display-2" >TROPICAL SUMMER</h1>
+            <h1 className="display-2" >TREAT YOURSELF</h1>
             <button className='button'>VISIT SHOP</button>
           </div>
 

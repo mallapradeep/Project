@@ -29,14 +29,39 @@ create table categories (
     id serial primary key,
     category text
 )
-
-
-
-
+--ADD TO Category
 insert into categories (category) 
 values('tops'), ('bottoms'), ('footwear');
 
+///////////////////Creating Profile Table////////////////////
+
+create table profile (
+    profile_id serial primary key,
+    fullName varchar(80),
+     emailAddress varchar(80),
+      street varchar(80),
+       city varchar(80),
+        zip integer,
+         state varchar(80),
+          phoneNumber integer,
+          user_id integer, foreign key(user_id) references users(user_id)
+          );
+
 ----------------------------
+-- --AccountInfo table
+-- create table accountInfo(
+--     id serial primary key,
+--     fullName varchar(80),
+--     emailAddress text,
+--     street varchar(80),
+--     city varchar(80),
+--     zip integer,
+--     state varchar(80),
+--     phoneNumber integer,
+--     user_id integer, 
+--     foreign key(user_id) references users(user_id) )
+
+-----------------------------------
 create table carts (
 -- cart_id serial primary key, 
 -- product_id integer REFERENCES products (product_id), 
@@ -101,19 +126,7 @@ values( 'Shoes','Nike Presto Shoes', 'https://c.static-nike.com/a/images/t_PDP_1
 
 
 
-///////////////////Creating Profile Table////////////////////
 
-create table profile (
-    profile_id serial primary key,
-    fullName varchar(80),
-     emailAddress varchar(80),
-      street varchar(80),
-       city varchar(80),
-        zip integer,
-         state varchar(80),
-          phoneNumber integer
-          --user_id integer, foreign key(user_id) references users(user_id)
-          );
 ///////////////////////////////////////////////////////////////////
 TOPS
 WOMEN
@@ -210,3 +223,4 @@ from products p
 join categories c on p.category_id = c.id
 where category_id = 1/2/3
 ------------------------------------------------------
+

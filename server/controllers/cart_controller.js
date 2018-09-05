@@ -107,10 +107,12 @@ module.exports = {
   let dbInstance = req.app.get("db");
   
    let { fullName, emailAddress, street, city, zip, state, phoneNumber } = req.body;
+   let  {user_id} = req.session.user;
+
   console.log(req.body);
 
   dbInstance
-    .add_accountInfo([fullName, emailAddress, street, city, zip, state, phoneNumber ])
+    .add_accountInfo([fullName, emailAddress, street, city, zip, state, phoneNumber, user_id ])
     .then(response => {
       console.log("info added");
       res.status(200).send(response);

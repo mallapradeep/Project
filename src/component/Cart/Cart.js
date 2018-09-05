@@ -113,10 +113,11 @@ class Cart extends Component {
               <h6 className="product-total" >Total</h6>
               </div>
               <div>{mappedCart}</div>
+
               <div className="cart-total">${this.props.totalCost}</div>
 
               <Link to="/form">
-                <button type="button" className="btn btn-success">
+                <button type="button" className="button">
                   Proceed To Checkout
                 </button>
               </Link>

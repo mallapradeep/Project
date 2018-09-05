@@ -1,5 +1,5 @@
 const initialState = {
-  user: "",
+  // user: "",
   products: [],
   cart: [],
   totalCost: 0,

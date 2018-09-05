@@ -46,5 +46,19 @@ body {
   }
 
   .button {
-    align-content: center;
+   justify-content: center;
+   border-radius: 200px;
+    background-color: green;
+    padding: 10px;
+  }
+
+  .display-1 {
+    color: white;
+
+  }
+
+  .display-2 {
+    border: 2px solid white;
+    padding: 10px;
+
   }

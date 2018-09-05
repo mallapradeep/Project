@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
+import Thankyou from '../Thankyou/Thankyou';
 
 class Checkout extends Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class Checkout extends Component {
         stripeKey={process.env.REACT_APP_STRIPE_KEY}
         amount={this.state.amount}
       />
+     
     );
   }
 }

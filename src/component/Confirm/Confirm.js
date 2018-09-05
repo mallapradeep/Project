@@ -3,10 +3,10 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import edit from './edit.svg';
 import './Confirm.css';
+import {connect} from 'react-redux';
 
 
-
-export default class Confirm extends Component {
+ class Confirm extends Component {
     constructor(){
         super()
 
@@ -19,147 +19,319 @@ export default class Confirm extends Component {
             editZip: false,
             editState: false,
             editPhoneNumber: false,
-            fullNameInput: 'hidden',
-            emailAddressInput: 'hidden',
-            streetInput: 'hidden',
-            cityInput: 'hidden',
-            zipInput: 'hidden',
-            stateInput: 'hidden',
-            phoneNumberInput: 'hidden',
+
+            hideFullNameInput: 'hidden',
+            hideEmailAddressInput: 'hidden',
+            hideStreetInput: 'hidden',
+            hideCityInput: 'hidden',
+            hideZipInput: 'hidden',
+            hideStateInput: 'hidden',
+            hidePhoneNumberInput: 'hidden',
+
             fullNameIcon: 'block',
             emailAddressIcon: 'block',
             streetIcon: 'block',
             cityIcon: 'block',
             zipIcon: 'block',
             stateIcon: 'block',
-            phoneNumberIcon: 'block'
-        }
-    }
+            phoneNumberIcon: 'block',
+            showButton: 'hidden',
 
-    componentDidMount() {
+            fullNameEdit: '',
+            emailAddressEdit: '',
+            streetEdit: '',
+            cityEdit: '',
+            zipEdit: '',
+            stateEdit: '',
+            phoneNumberEdit: ''
+
+        }
+      }
+      
+      componentDidMount() {
+        this.getAccountInfo()
+        
+      }
+      
+      getAccountInfo(){
         axios.get('/api/accountInfo').then(response => {
-            console.log(response);
-            this.setState({
-              profile: response.data
-            });
+          console.log(response);
+          this.setState({
+            profile: response.data
           });
-        }
+        });
+      }
+      
+      setToDefault(){
+        this.setState({
+          hideFullNameInput: 'hidden',
+          hideEmailAddressInput: 'hidden',
+          hideStreetInput: 'hidden',
+          hideCityInput: 'hidden',
+          hideZipInput: 'hidden',
+          hideStateInput: 'hidden',
+          hidePhoneNumberInput: 'hidden',
 
+          hideFullNameIcon: 'block',
+          hideEmailAddressIcon: 'block',
+          hideStreetIcon: 'block',
+          hideCityIcon: 'block',
+          hideZipIcon: 'block',
+          hideStateIcon: 'block',
+          hidePhoneNumberIcon: 'block'
+        })
+      }
+      
         showNameInput(){
           this.setState({
-            fullNameInput: 'text',
-            fullNameIcon: 'none'
+            hideFullNameInput: 'text',
+            fullNameIcon: 'none',
+            showButton: 'visible'
           })
         }
 
         showEmailAddressInput(){
           this.setState({
-            emailAddressInput: 'text',
-            emailAddressIcon: 'none'
+            hideEmailAddressInput: 'text',
+            emailAddressIcon: 'none',
+            showButton: 'visible'
+
           })
         }
 
         showStreetInput(){
           this.setState({
-            streetInput: 'text',
-            streetIcon: 'none'
+            hideStreetInput: 'text',
+            streetIcon: 'none',
+            showButton: 'visible'
+
           })
         }
 
         showCityInput(){
           this.setState({
-            cityInput: 'text',
-            cityIcon: 'none'
+            hideCityInput: 'text',
+            cityIcon: 'none',
+            showButton: 'visible'
+
           })
         }
 
         showZipInput(){
           this.setState({
-            zipInput: 'text',
-            zipIcon: 'none'
+            hideZipInput: 'text',
+            zipIcon: 'none',
+            showButton: 'visible'
+
           })
         }
 
         showStateInput(){
           this.setState({
-            stateInput: 'text',
-            stateIcon: 'none'
+            hideStateInput: 'text',
+            stateIcon: 'none',
+            showButton: 'visible'
+
           })
         }
 
         showPhoneNumberInput(){
           this.setState({
-            phoneNumberInput: 'text',
-            phoneNumberIcon: 'none'
+            hidePhoneNumberInput: 'text',
+            phoneNumberIcon: 'none',
+            showButton: 'visible'
+
           })
         }
+
+        //for all the handleChange method
+        handleChange(e) {
+          let { name, value } = e.target
+
+          this.setState({
+            [name]: value
+          })
+        }
+        handleFullName(e,id,text) {
+          if(e.key ==='Enter'){
+            axios.put(`/api/editNameInfo/${id}`,{text})
+            .then(resp=> {
+            this.getAccountInfo()
+            this.setToDefault()
+            })   
+          }
+        }
+
+        handleEmailAddress(e,id,text) {
+          if(e.key ==='Enter'){
+            axios.put(`/api/editEmailAddressInfo/${id}`,{text})
+            .then(resp=> {
+            this.getAccountInfo()
+            this.setToDefault()
+            })
+          }
+        }
+
+        handleStreet(e,id,text) {
+          if(e.key ==='Enter'){
+            axios.put(`/api/editStreetInfo/${id}`,{text})
+            .then(resp=> {
+            this.getAccountInfo()
+            this.setToDefault()
+            })
+          }
+        }
+
+        handleCity(e,id,text) {
+          if(e.key ==='Enter'){
+            axios.put(`/api/editCityInfo/${id}`,{text})
+            .then(resp=> {
+            this.getAccountInfo()
+            this.setToDefault()
+            })
+          }
+        }
+
+        handleZip(e,id,text) {
+          if(e.key ==='Enter'){
+            axios.put(`/api/editZipInfo/${id}`,{text})
+            .then(resp=> {
+            this.getAccountInfo()
+            this.setToDefault()
+            })
+          }
+        }
+
+        handleState(e,id,text) {
+          if(e.key ==='Enter'){
+            axios.put(`/api/editStateInfo/${id}`,{text})
+            .then(resp=> {
+            this.getAccountInfo()
+            this.setToDefault()
+            })
+          }
+        }
+
+        handlePhoneNumber(e,id,text) {
+          if(e.key ==='Enter'){
+            axios.put(`/api/editPhoneNumberInfo/${id}`,{text})
+            .then(resp=> {
+            this.getAccountInfo()
+            this.setToDefault()
+            })
+          }
+        }
+
 
 
   render() {
       let displayProfile = this.state.profile.map((ele, i) => {
+        console.log(ele);
           return (
               <div key={i} className='mapped-shipping'>
               <h1>Checkout</h1>
 
               <div className='ele-div'>
-              <div>FullName:{ele.fullname}</div>
+              <div>FullName: {ele.fullname}</div>
               <img height='20px' width='20px' src={edit} alt='edit' 
                 onClick={()=> this.showNameInput()}
                 style={{display: `${this.state.fullNameIcon}`}} />
-                <input type={this.state.fullNameInput} />
+
+                <input 
+                name='fullNameEdit'
+                // value={this.state.fullNameEdit}
+                type={this.state.hideFullNameInput}
+                onChange={e => this.handleChange(e)}
+                onKeyPress={(e)=> this.handleFullName(e,ele.user_id, this.state.fullNameEdit)} /><hr/>
               </div>
 
 
               <div className='ele-div'>
-              <div>EmailAddress:{ele.emailaddress}</div>
+              <div>EmailAddress: {ele.emailaddress}</div>
               <img height='20px' width='20px' src={edit} alt='edit' 
-                onClick={()=> this.showNameInput()}
-                style={{display: `${this.state.fullNameIcon}`}} />
-                <input type={this.state.fullNameInput} />
+                onClick={()=> this.showEmailAddressInput()}
+                style={{display: `${this.state.emailAddressIcon}`}} />
+                <input
+                 name='emailAddressEdit'
+                 value={this.state.emailAddressEdit}
+                 type={this.state.hideEmailAddressInput}
+                 onChange={e => this.handleChange(e)}
+                 onKeyPress={(e)=> this.handleEmailAddress(e,ele.user_id, this.state.emailAddressEdit )}
+                  /><hr/>
               </div>
-
+  
 
               <div className='ele-div'>
-              <div>Street:{ele.street}</div>
+              <div>Street: {ele.street}</div>
               <img height='20px' width='20px' src={edit} alt='edit' 
-                onClick={()=> this.showNameInput()}
-                style={{display: `${this.state.fullNameIcon}`}} />
-                <input type={this.state.fullNameInput} />
+                onClick={()=> this.showStreetInput()}
+                style={{display: `${this.state.streetIcon}`}} />
+                 <input
+                  name='streetEdit'
+                 value={this.state.streetEdit}
+                 type={this.state.hideStreetInput}
+                 onChange={e => this.handleChange(e)}
+                 onKeyPress={(e)=> this.handleStreet(e,ele.user_id, this.state.streetEdit )}
+                  /><hr/>
               </div>
 
 
               <div className='ele-div'>
               <div>City:{ele.city}</div>
               <img height='20px' width='20px' src={edit} alt='edit' 
-                onClick={()=> this.showNameInput()}
-                style={{display: `${this.state.fullNameIcon}`}} />
-                <input type={this.state.fullNameInput} />
+                onClick={()=> this.showCityInput()}
+                style={{display: `${this.state.cityIcon}`}} />
+               <input
+                name='cityEdit'
+                 value={this.state.cityEdit}
+                 type={this.state.hideCityInput}
+                 onChange={e => this.handleChange(e)}
+                 onKeyPress={(e)=> this.handleCity(e,ele.user_id, this.state.cityEdit )}
+                  /><hr/>
               </div>
 
 
               <div className='ele-div'>
-              <div>Zip:{ele.zip}</div>
+              <div>Zip: {ele.zip}</div>
               <img height='20px' width='20px' src={edit} alt='edit' 
-                onClick={()=> this.showNameInput()}
-                style={{display: `${this.state.fullNameIcon}`}} />
-                <input type={this.state.fullNameInput} />
+                onClick={()=> this.showZipInput()}
+                style={{display: `${this.state.zipIcon}`}} />
+              <input
+                name='zipEdit'
+                 value={this.state.zipEdit}
+                 type={this.state.hideZipInput}
+                 onChange={e => this.handleChange(e)}
+                 onKeyPress={(e)=> this.handleZip(e,ele.user_id, this.state.zipEdit )}
+                  /><hr/>
               </div>
 
 
               <div className='ele-div'>
-              <div>State:{ele.state}</div>
+              <div>State: {ele.state}</div>
               <img height='20px' width='20px' src={edit} alt='edit' 
-                onClick={()=> this.showNameInput()}
-                style={{display: `${this.state.fullNameIcon}`}} />
-                <input type={this.state.fullNameInput} />
+                onClick={()=> this.showStateInput()}
+                style={{display: `${this.state.stateIcon}`}} />
+               <input
+                name='stateEdit'
+                 value={this.state.stateEdit}
+                 type={this.state.hideStateInput}
+                 onChange={e => this.handleChange(e)}
+                 onKeyPress={(e)=> this.handleState(e,ele.user_id, this.state.stateEdit )}
+                  /><hr/>
               </div>
              
               <div className='ele-div'>
-              <div>PhoneNumber:{ele.phonenumber}</div>
+              <div>PhoneNumber: {ele.phonenumber}</div>
               <img height='20px' width='20px' src={edit} alt='edit' 
-                onClick={()=> this.showNameInput()}
-                style={{display: `${this.state.fullNameIcon}`}} />
-                <input type={this.state.fullNameInput} />
+                onClick={()=> this. showPhoneNumberInput()}
+                style={{display: `${this.state.phoneNumberIcon}`}} />
+                <input
+                name='phoneNumberEdit'
+                 value={this.state.phoneNumberEdit}
+                 type={this.state.hidePhoneNumberInput}
+                 onChange={e => this.handleChange(e)}
+                 onKeyPress={(e)=> this.handlePhoneNumber(e,ele.user_id, this.state.phoneNumberEdit )}
+                  /><hr/>
               </div>
              
              
@@ -186,3 +358,11 @@ export default class Confirm extends Component {
     )
   }
 }
+
+function mapStateToProps(state){
+  return{
+    total:state.total
+  }
+}
+
+export default connect(mapStateToProps, {})(Confirm);

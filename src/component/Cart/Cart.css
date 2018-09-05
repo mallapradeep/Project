@@ -61,6 +61,12 @@
     position: relative;
     font-size: 30px;
     left: 20px;
+    top: 60px;
+}
+
+.button {
+   background-color: greenyellow;
+   margin-top: 60px;
 }
 
 .plus {

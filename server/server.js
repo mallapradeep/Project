@@ -77,6 +77,16 @@ app.get(`/api/products`, products.getAll ); //displays the products at shop
 // //search
 app.get(`/api/search/:name`, search_controller.search); //display d product ur searchin for
 
+//edit Account INfo
+app.put(`/api/editNameInfo/:id`, products.editFullNameInfo);
+app.put(`/api/editEmailAddressInfo/:id`, products.editEmailAddressInfo);
+app.put(`/api/editStreetInfo/:id`, products.editStreetInfo);
+app.put(`/api/editCityInfo/:id`, products.editCityInfo);
+app.put(`/api/editZipInfo/:id`, products.editZipInfo);
+app.put(`/api/editStateInfo/:id`, products.editStateInfo);
+app.put(`/api/editPhoneNumberInfo/:id`, products.editPhoneNumberInfo);
+
+
 
 
 //auth0 comes to this endpoint to get
@@ -105,8 +115,9 @@ app.get('/auth/callback', async (req, res) => {
     //  aarays gets returned from database query
      let db = req.app.get('db')
 //    let foundUser =  await req.app.get('db').find_user([sub])
-    let foundUser =  db.find_user([sub])
+    let foundUser =  await db.find_user([sub])
    if (foundUser[0]) {
+       console.log(foundUser[0])
        req.session.user = foundUser[0];
        res.redirect('/#/private')
    } else {
