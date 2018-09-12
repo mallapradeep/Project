@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import edit from './edit.svg';
 import './Confirm.css';
 import {connect} from 'react-redux';
+import StripeCheckout from "react-stripe-checkout";
 
 
  class Confirm extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
 
         this.state = {
             profile: [],
@@ -43,7 +44,9 @@ import {connect} from 'react-redux';
             cityEdit: '',
             zipEdit: '',
             stateEdit: '',
-            phoneNumberEdit: ''
+            phoneNumberEdit: '',
+
+            amount: 10000
 
         }
       }
@@ -52,6 +55,22 @@ import {connect} from 'react-redux';
         this.getAccountInfo()
         
       }
+
+      //for stripe n take it to the TY page
+      onToken = token => {
+        token.card = void 0;
+        axios
+          .post("/api/checkout", { token, amount: this.state.amount })
+          .then(res => {
+            this.props.history.push('/thankyou')
+          });
+      };
+
+      //nodemailer
+      sendEmail(obj){
+        axios.post('/api/send', obj)
+      }
+     
       
       getAccountInfo(){
         axios.get('/api/accountInfo').then(response => {
@@ -349,8 +368,9 @@ import {connect} from 'react-redux';
       <div className="checkout-form card p-5 w-50">
         <h2>Confirmation Page</h2>
         <div>{displayProfile}</div>
+        
         <Link to="/checkout">
-          <button type="button" className="btn btn-success" >
+          <button type="button" className="btn btn-success" onClick={()=>this.sendEmail({text: 'Thank you for Shopping!! Your Purchas will be delivered within 3 days'})}>
            Confirm
           </button>
         </Link>

@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import './Thankyou.css';
 
 export default class Thankyou extends Component {
   render() {
     return (
-      <div>
-        <h1>ORDER CONFIRMED</h1>
-        <h1>Thank you, Your order is confirmed.</h1>
+      <div className='content'>
+        <h2>Thankyou for Shopping !!</h2>
+       <h2>Your Order has been Confirmed</h2>
       </div>
     )
   }

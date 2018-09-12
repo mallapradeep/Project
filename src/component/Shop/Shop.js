@@ -15,6 +15,7 @@ class Shop extends Component {
     };
   }
 
+  
   componentDidMount() {
     axios.get("/api/products").then(response => {
       console.log(response);
@@ -47,12 +48,12 @@ class Shop extends Component {
     console.log(this.state.products);
     //mapping over the products to display on shop
     let displayProducts = this.state.products.map((item, i) => {
-      console.log(item);
+      // console.log(item);
       // const {id,  name, description, image, price } = product;
       return (
         
         <div key={i} style={{ float: "left" }} className="shop card m-5">
-          <Link to={`/product/${item.img}`}>
+          <Link to={`/product/${item.image}`}>
             <img width="300px" height="300px" src={item.image} alt="image" />
           </Link>
           <div className="card-footer">

@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { searchProduct } from "../../ducks/reducer";
 import { Link } from "react-router-dom";
 import ShoppingCart from "../../img/shopping-cart.png";
+import top from '../Search/top.png';
+import './Search.css';
 
 class Search extends Component {
   constructor() {
@@ -37,7 +39,7 @@ class Search extends Component {
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <a className="navbar-brand" href="#">
-            LUGAWEAR
+           <img className='logo1' src = {top} alt="logo" />
           </a>
           <button
             className="navbar-toggler"

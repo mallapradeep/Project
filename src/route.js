@@ -13,6 +13,7 @@ import Category from "./component/Category/Category";
 import Tops from './component/Tops/Tops';
 import Bottoms from './component/Bottoms/Bottoms';
 import Footwear from './component/Footwear/Footwear';
+import Thankyou from './component/Thankyou/Thankyou';
 
 
 
@@ -30,6 +31,8 @@ export default (
     <Route path="/tops" component={Tops} />
     <Route path="/bottoms" component={Bottoms} />
     <Route path="/footwear" component={Footwear} />
+    <Route path="/thankyou" component={Thankyou} />
+
 
 
   </Switch>

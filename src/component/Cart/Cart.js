@@ -18,6 +18,7 @@ class Cart extends Component {
   //componentDidMount gets d cart every time there is any changes in d page
   componentDidMount() {
     this.getCart();
+    // this.getUser();
   }
 
   getCart() {
@@ -58,7 +59,19 @@ class Cart extends Component {
     });
   }
 
+  // getUser() {
+  //   axios.get("/api/findUser").then(resp => {
+  //     if (resp.data) {
+  //       console.log(resp.data);
+  //       // this.props.history.push("/confirm");
+  //     } else {
+  //       this.props.history.push("/login");
+  //     }
+  //   });
+  // }
+
   render() {
+    console.log(this.state.cart);
     //updating quantity in my cart
     let newCart = [];
     for (var i = 0; i < this.state.cart.length; i++) {
@@ -79,25 +92,28 @@ class Cart extends Component {
       return (
         <div className="cart py-5" key={i}>
           {/* <div>{i + 1}</div> */}
-      
 
           <img src={product.image} className="cart-image" />
 
-          
           <div className="cart-price">${product.price}</div>
 
-        
           <div className="cart-quantity">{product.quantity}</div>
 
-          <button className="plus" onClick={() => this.addToQuantity(product)}>+</button>
+          <button className="plus" onClick={() => this.addToQuantity(product)}>
+            +
+          </button>
 
-         
-
-          <button className="minus" onClick={() => this.deleteFromQuantity(product.cart_id)}>
+          <button
+            className="minus"
+            onClick={() => this.deleteFromQuantity(product.cart_id)}
+          >
             -
           </button>
 
-          <button className="delete-product" onClick={() => this.deleteFromCart(product.product_id)}>
+          <button
+            className="delete-product"
+            onClick={() => this.deleteFromCart(product.product_id)}
+          >
             <img width="20px" height="20px" src={Delete} />
           </button>
         </div>
@@ -105,23 +121,23 @@ class Cart extends Component {
     });
 
     return (
-          <div className="container cart-flow">
-            <div className="cart-container bg-dark">
-              <h6 className="product-title" >Product</h6>
-              <h6 className="product-price" >Price</h6>
-              <h6 className="product-quantity" >Quantity</h6>
-              <h6 className="product-total" >Total</h6>
-              </div>
-              <div>{mappedCart}</div>
+      <div className="container cart-flow">
+        <div className="cart-container bg-dark">
+          <h6 className="product-title">Product</h6>
+          <h6 className="product-price">Price</h6>
+          <h6 className="product-quantity">Quantity</h6>
+          <h6 className="product-total">Total</h6>
+        </div>
+        <div>{mappedCart}</div>
 
-              <div className="cart-total">${this.props.totalCost}</div>
+        <div className="cart-total">${this.props.totalCost}</div>
 
-              <Link to="/form">
-                <button type="button" className="button">
-                  Proceed To Checkout
-                </button>
-              </Link>
-         </div>
+        <Link to="/form">
+          <button type="button" className="button">
+            Proceed To Checkout
+          </button>
+        </Link>
+      </div>
     );
   }
 }

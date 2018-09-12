@@ -1,16 +1,15 @@
-require('dotenv').config();
-const stripe = require('stripe')(process.env.STRIPE_SECRET);
-
+require("dotenv").config();
+const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 module.exports = {
   add: (req, res, next) => {
     let dbInstance = req.app.get("db");
-    
-     let { product_id, user_id, quantity } = req.body;
+
+    let { product_id, user_id, quantity } = req.body;
     console.log(req.body);
 
     dbInstance
-      .add_product([product_id, req.session.user.user_id, quantity ])
+      .add_product([product_id, req.session.user.user_id, quantity])
       .then(response => {
         console.log("product added");
         res.status(200).send(response);
@@ -39,7 +38,7 @@ module.exports = {
   deleteLine: (req, res, next) => {
     let dbInstance = req.app.get("db");
     let product_id = req.params.id;
-    console.log('I got it');
+    console.log("I got it");
     console.log(req.params);
 
     dbInstance
@@ -49,7 +48,7 @@ module.exports = {
         res.status(500).send("Oops! Something went wrong.");
         console.log(err);
       });
-    },
+  },
 
   update: (req, res, next) => {
     let dbInstance = req.app.get("db");
@@ -66,77 +65,125 @@ module.exports = {
       });
   },
 
-//displays d product in d cart
+  //displays d product in d cart
   get: (req, res, next) => {
     let dbInstance = req.app.get("db");
-
-   dbInstance
-     .get_cart(req.session.user.user_id)
-     .then(response => {
-       console.log("retrieved cart");
-       res.status(200).send(response);
-     })
-     .catch(err => {
-       res.status(500).send("Oops! Something went wrong.");
-       console.log(err);
-     });
+    dbInstance
+      .get_cart(req.session.user.user_id)
+      .then(response => {
+        console.log(req.session);
+        console.log("retrieved cart");
+        res.status(200).send(response);
+      })
+      .catch(err => {
+        res.status(500).send("Oops! Something went wrong.");
+        console.log(err);
+      });
   },
-//Stripe
+  //Stripe
   handlePayment: (req, res) => {
-    const { amount, token:{id}} = req.body
+    const {
+      amount,
+      token: { id }
+    } = req.body;
     stripe.charges.create(
-        {
-            amount: amount,
-            currency: "usd",
-            source: id,
-            description: "Test charge from Travis"
-        },
-        (err, charge) => {
-            if(err) {
-                console.log(err)
-                return res.status(500).send(err)
-            } else {
-                console.log(charge)
-                return res.status(200).send(charge)
-            }
+      {
+        amount: amount,
+        currency: "usd",
+        source: id,
+        description: "Test charge from Travis"
+      },
+      (err, charge) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).send(err);
+        } else {
+          console.log(charge);
+          return res.status(200).send(charge);
         }
-    )
-},
-//adding account info to the db
+      }
+    );
+  },
+  //adding account info to the db
   save: (req, res, next) => {
-  let dbInstance = req.app.get("db");
+    let dbInstance = req.app.get("db");
+
+    let {
+      fullName,
+      emailAddress,
+      street,
+      city,
+      zip,
+      state,
+      phoneNumber
+    } = req.body;
+    let { user_id } = req.session.user;
+
+    console.log(req.body);
+
+    dbInstance
+      .add_accountInfo([
+        fullName,
+        emailAddress,
+        street,
+        city,
+        zip,
+        state,
+        phoneNumber,
+        user_id
+      ])
+      .then(response => {
+        console.log("info added");
+        res.status(200).send(response);
+      })
+      .catch(err => {
+        res.status(500).send("Oops! Something went wrong.");
+        console.log(err);
+      });
+  },
+  getInfo: (req, res, next) => {
+    let dbInstance = req.app.get("db");
+
+    dbInstance
+      .get_accountInfo()
+      //    .get_accountInfo([req.session.user.user_id])
+      .then(response => {
+        console.log("retrieved info");
+        res.status(200).send(response);
+      })
+      .catch(err => {
+        res.status(500).send("Oops! Something went wrong.");
+        console.log(err);
+      });
+  },
+
+  checklogin: async (req, res, next) => {
+    let dbInstance = req.app.get("db");
+    console.log(req.session);
+    let { id } = req.session.user;
+    console.log(id);
+
   
-   let { fullName, emailAddress, street, city, zip, state, phoneNumber } = req.body;
-   let  {user_id} = req.session.user;
+      if (req.session.user) {
+        res.send(req.session.user);
+      } else {
+        res.send("you need to login");
+      }
+   
+  },
 
-  console.log(req.body);
+  clearCart:(req, res, next) => {
+    let dbInstance = req.app.get("db");
+    let user_id = req.session.user.user_id;
+    console.log("clear the cart");
+  
 
-  dbInstance
-    .add_accountInfo([fullName, emailAddress, street, city, zip, state, phoneNumber, user_id ])
-    .then(response => {
-      console.log("info added");
-      res.status(200).send(response);
-    })
-    .catch(err => {
-      res.status(500).send("Oops! Something went wrong.");
-      console.log(err);
-    });
-
-
-},
-getInfo: (req, res, next) => {
-  let dbInstance = req.app.get("db");
-
-   dbInstance
-   .get_accountInfo()
-//    .get_accountInfo([req.session.user.user_id])
-   .then(response => {
-     console.log("retrieved info");
-     res.status(200).send(response);
-   })
-   .catch(err => {
-     res.status(500).send("Oops! Something went wrong.");
-     console.log(err);
-   });
+    dbInstance
+      .delete_cart([user_id])
+      .then(response => res.status(200).send(response))
+      .catch(err => {
+        res.status(500).send("Oops! Something went wrong.");
+        console.log(err);
+      });
   }
-}
+};

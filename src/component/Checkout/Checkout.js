@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 import Thankyou from '../Thankyou/Thankyou';
+import './Checkout.css';
+import { connect } from "react-redux";
+
 
 class Checkout extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      amount: 100
+      amount: 10000
     };
   }
 
@@ -16,23 +19,38 @@ class Checkout extends Component {
     axios
       .post("/api/checkout", { token, amount: this.state.amount })
       .then(res => {
-        console.log(res);
+        axios.delete('/api/deleteCart')
+        this.props.history.push('/thankyou')
       });
   };
 
   render() {
     return (
+      <div className='pay'>
+      <h2>ORDER SUMMARY</h2>
+ 
+        <h4>Total: ${this.props.totalCost}</h4>
+    
       <StripeCheckout
         name="LUGAWEAR"
         description="Thank you for your purchase"
         image="http://via.placeholder.com/100x100"
         token={this.onToken}
         stripeKey={process.env.REACT_APP_STRIPE_KEY}
-        amount={this.state.amount}
+        amount={this.props.totalCost*100}
       />
-     
+     </div>
     );
   }
 }
 
-export default Checkout;
+function mapStateToProps(state) {
+  const {  totalCost } = state;
+
+  return {
+    
+    totalCost
+  };
+}
+
+export default connect(mapStateToProps, null)(Checkout);

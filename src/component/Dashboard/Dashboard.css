@@ -1,64 +1,247 @@
 body {
-    margin: 0;
-    padding: 0;
-  }
+  margin: 0;
+  padding: 0;
+}
 
-  .hero-title {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 5;
-  }
-  .box1 {
-    height: 100vh;
-    width: 100%;
-    background-image: url('https://images.unsplash.com/photo-1445282804813-123ac28fe498?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=1ec5258987744b463394504ac602f46e&auto=format&fit=crop&w=800&q=60');
-    background-size: cover;
-    display: table;
-    background-attachment: fixed;
+.hero-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+.box1 {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background-image: url("https://i1.wp.com/coldncoffee.com/wp-content/uploads/2018/03/daniel-apodaca-584113-unsplash-e1521305102343.jpg?ssl=1");
+  background-size: cover;
+  display: table;
+  background-attachment: fixed;
+}
 
-  }
-  .box2 {
-    height: 100vh;
-    width: 100%;
-    background-image:  url('https://images.unsplash.com/photo-1526052548799-60c6d6c666b5?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b377f2277a8562127ae353e6c88c04c5&auto=format&fit=crop&w=1430&q=80');
-    background-size: cover;
-    display: table;
-    background-attachment: fixed;
-  }
-  .box3 {
-    height: 100vh;
-    width: 100%;
-    background-image:  url('https://images.unsplash.com/photo-1460353581641-37baddab0fa2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c15305e72c1ead61b6b23d4b0041de66&auto=format&fit=crop&w=1351&q=80');
-    background-size: cover;
-    display: table;
-    background-attachment: fixed;
-  }
-  h1{
-    font-family: arial black;
-    font-size: 50px;
-    color: white;
-    margin: 0px;
-    text-align: center;
-    display: table-cell;
-    vertical-align: middle
-  }
+.box1-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+  border: 5px solid white;
+}
 
-  .button {
-   justify-content: center;
-   border-radius: 200px;
-    background-color: green;
-    padding: 10px;
+.box1-title h1 {
+  font-size: 80px;
+}
+
+.box1-title button {
+  position: relative;
+  left: 240px;
+  padding: 10px 20px;
+  background: rgb(255, 102, 0);
+  color: white;
+}
+
+.box2 {
+  height: 100vh;
+  width: 100%;
+  background-image: url("https://i0.wp.com/www.kaleishafetters.com/wp-content/uploads/2016/12/ben-o-sullivan-382817-unsplash.jpg");
+  background-size: cover;
+  display: table;
+  background-attachment: fixed;
+}
+
+.box2-title {
+  position: absolute;
+  top: 280%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+  border: 5px solid white;
+}
+.box2-title h1 {
+  font-size: 80px;
+}
+
+.box2-title button {
+  position: relative;
+  left: 200px;
+  padding: 10px 20px;
+  background: rgb(255, 102, 0);
+  color: white;
+}
+
+.box3 {
+  height: 100vh;
+  width: 100%;
+  background-image: url("https://images.unsplash.com/photo-1507065938252-17f453893fc3?ixlib=rb-0.3.5&s=3e117449109ad6a11de62d65fcdb86bb&w=1000&q=80");
+  background-size: cover;
+  display: table;
+  background-attachment: fixed;
+}
+
+
+.box3-title {
+  position: absolute;
+  top: 380%;
+  left: 63%;
+  transform: translate(-80%, -50%);
+  padding: 30px;
+  border: 5px solid white;
+}
+.box3-title h1 {
+  font-size: 80px;
+}
+
+.box3-title button {
+  position: relative;
+  left: 240px;
+  padding: 10px 20px;
+  background: rgb(255, 102, 0);
+  color: white;
+}
+
+h1 {
+  font-family: arial black;
+  font-size: 50px;
+  color: white;
+  margin: 0px;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.button {
+  position: relative;
+  top: 10px;
+  left: 240px;
+  right: 10px;
+  padding: 10px 20px;
+  background: rgb(255, 102, 0);
+  color: white;
+}
+
+.display-1 {
+  color: white;
+}
+
+.display-2 {
+  border: 2px solid white;
+  padding: 10px;
+}
+
+/* //////FOOTER/////////////////////////////// */
+
+.row {
+  background-color: #fff;
+  padding: 20px;
+  font-size: 100%;
+  background-color: black;
+
+}
+
+.footer-row1 {
+  margin-top: 40px;
+  margin-left: 20px;
+}
+
+
+.footer-row2 {
+  list-style: none;
+  float: right;
+  margin-top: 50px;
+}
+.footer3 {
+  text-align: center;
+  margin-right: 300px;
+  
+
+  
+}
+.footer-nav {
+  list-style: none;
+  float: left;
+}
+.social-links {
+  list-style: none;
+  float: right;
+  margin-top: 30px;
+  margin-left: 750px;
+
+}
+
+.footer-nav li,
+.social-links li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+
+.footer-nav li:last-child,
+.social-links li:last-child {
+  margin-right: 0;
+}
+
+.footer-nav li a:link,
+.footer-nav li a:visited,
+.social-links li a:link,
+.social-links li a:visited {
+  text-decoration: none;
+  border: 0;
+  color: #888;
+}
+
+
+.footer-nav li a:hover,
+.footer-nav li a:active{
+  color: #ddd;
+}
+
+.social-links li a:link,
+.social-links li a:visited {
+  font-size: 180%;
+}
+
+
+footer p {
+  color: #888;
+  text-align: center;
+  font-size: 90%;
+  margin-top: 30px;
+
+}
+
+
+
+/* @media screen and (min-width: 320px) {
+  .main-container {
+    width: 850px !important;
   }
-
-  .display-1 {
-    color: white;
-
+  p {
+    font-size: 1.25rem;
   }
+ .box1 button{
+    position: relative;
+    left: 100px;
+ }
+ .box2-title{
+  position: absolute;
+  left: 500px;
+  width: 600px;
 
-  .display-2 {
-    border: 2px solid white;
-    padding: 10px;
+}
 
+.box3-title {
+  position: relative;
+  
+
+  
+}
+  
+} */
+
+@media screen and (min-width: 800px) {
+  p {
+    font-size: 1.5rem;
+    line-height: 1.5
   }
+}
