@@ -42,7 +42,8 @@ class Private extends Component {
         ) : (
           <p>Please Log In</p>
         )}
-        <a href="http://localhost:3005/auth/logout">
+        {/* <a href="http://localhost:3005/auth/logout"> */}
+        <a href={process.env.REACT_APP_LOGOUT}>
           <button>Logout</button>
         </a>
       </div>

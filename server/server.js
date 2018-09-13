@@ -15,6 +15,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET);
 const nodemailer = require("nodemailer");
  const path = require("path");
 
+
 ///-------NODEMAILER---------/////
 
 // const nodemailer = require("nodemailer");
@@ -48,6 +49,8 @@ const nodemailer = require("nodemailer");
 //initialize express app
 const app = express();
 app.use(bodyParser.json());
+
+app.use( express.static( `${__dirname}/../build` ) );
 
 //destructure from process.env
 const {
@@ -188,7 +191,7 @@ app.get("/api/user-data", envCheck, (req, res) => {
 
 app.get("/auth/logout", (req, res) => {
   req.session.destroy();
-  res.redirect("http://localhost:3000");
+  res.redirect(process.env.SUCCESS);
 });
 
 //listen port
