@@ -6,7 +6,7 @@ import denim from "../../img/denim1.jpg";
 import combo from "../../img/combo.jpg";
 import winter from "../../img/winter.jpg";
 import basic from "../../img/basic.jpg";
-import red from "../../img/red.jpg";
+import women from "../../img/women.jpg";
 
 
 
@@ -39,13 +39,13 @@ export default class Dashboard extends Component {
           </ol>
           <div className="carousel-inner">
             <div className="carousel-item active">
-              <img className="d-block w-100" width="100vw" height="1000px" src={red} alt="First slide" />
+              <img className="d-block img-fluid"  src={women} alt="First slide" />
             </div>
             <div className="carousel-item">
-              <img className="d-block w-100" src={blazer} alt="Second slide" />
+              <img className="d-block img-fluid" src={blazer} alt="Second slide" />
             </div>
             <div className="carousel-item">
-              <img className="d-block w-100" src={denim} alt="Third slide" />
+              <img className="d-block img-fluid" src={denim} alt="Third slide" />
             </div>
           </div>
           <a

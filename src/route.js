@@ -14,6 +14,8 @@ import Tops from './component/Tops/Tops';
 import Bottoms from './component/Bottoms/Bottoms';
 import Footwear from './component/Footwear/Footwear';
 import Thankyou from './component/Thankyou/Thankyou';
+import About from './component/About/About';
+
 
 
 
@@ -32,6 +34,8 @@ export default (
     <Route path="/bottoms" component={Bottoms} />
     <Route path="/footwear" component={Footwear} />
     <Route path="/thankyou" component={Thankyou} />
+    <Route path="/about" component={About} />
+
 
 
 

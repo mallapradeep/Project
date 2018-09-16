@@ -9,6 +9,7 @@ const initialState = {
 };
 
 const ADD_TO_CART = "ADD_TO_CART";
+const SUBTRACT_FROM_CART = "SUBTRACT_FROM_CART";
 const UPDATE_USER = "UPDATE_USER";
 const SEARCH_PRODUCT = "SEARCH_PRODUCT";
 const DELETE_PRODUCT = "DELETE_PRODUCT";
@@ -17,6 +18,14 @@ export function addToCart(product, direction, description) {
   let price = product.price;
   return {
     type: ADD_TO_CART,
+    payload: { product, price, direction, description }
+  };
+}
+
+export function subtractFromCart(product, direction, description) {
+  let price = product.price;
+  return {
+    type: SUBTRACT_FROM_CART,
     payload: { product, price, direction, description }
   };
 }
@@ -45,33 +54,20 @@ export function deleteFromCart(productId) {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    
     case ADD_TO_CART:
-      // const { cart } = state;
        const { product, price, direction } = action.payload;
-      // let newProduct = {},
-      //   newCart = cart;
-
-      // updating my quantity
-      // let found = cart.findIndex(item => item.id === product.id);
-      // if (found >= 0) {
-      //   // If item is already in the cart
-      //   newProduct = product;
-      //   if (direction === "up") newProduct.quantity += 1;
-      //   else if (direction === "down") newProduct.quantity -= 1;
-      //   newCart.splice(found, 1, newProduct);
-      // } else {
-      //   // if item is not in the cart
-      //   newProduct = product;
-      //   newProduct.quantity = 1;
-      //   newCart.push(newProduct);
-      // }   
-
       return Object.assign({}, state, {
-        // cart: newCart,
         totalCost: state.totalCost  + price ,
-        // cart: action.payload
         cart: [...state.cart, product]
       });
+
+    //   case SUBTRACT_FROM_CART:
+    //   const { product, price, direction } = action.payload;
+    //  return Object.assign({}, state, {
+    //    totalCost: state.totalCost  - price ,
+    //    cart: [...state.cart, product]
+    //  });
 
     case UPDATE_USER:
       return Object.assign({}, state, { user: action.payload });

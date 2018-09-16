@@ -43,7 +43,7 @@ body {
 
 .box2 {
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   background-image: url("https://i0.wp.com/www.kaleishafetters.com/wp-content/uploads/2016/12/ben-o-sullivan-382817-unsplash.jpg");
   background-size: cover;
   display: table;
@@ -60,6 +60,8 @@ body {
 }
 .box2-title h1 {
   font-size: 80px;
+  width: 90%;
+  overflow: hidden;
 }
 
 .box2-title button {
@@ -78,7 +80,6 @@ body {
   display: table;
   background-attachment: fixed;
 }
-
 
 .box3-title {
   position: absolute;
@@ -136,14 +137,13 @@ h1 {
   padding: 20px;
   font-size: 100%;
   background-color: black;
-
+  width: 100vw;
 }
 
 .footer-row1 {
   margin-top: 40px;
   margin-left: 20px;
 }
-
 
 .footer-row2 {
   list-style: none;
@@ -153,9 +153,6 @@ h1 {
 .footer3 {
   text-align: center;
   margin-right: 300px;
-  
-
-  
 }
 .footer-nav {
   list-style: none;
@@ -166,7 +163,11 @@ h1 {
   float: right;
   margin-top: 30px;
   margin-left: 750px;
+}
 
+.footer {
+  width:90vw;
+  overflow: hidden;
 }
 
 .footer-nav li,
@@ -174,7 +175,6 @@ h1 {
   display: inline-block;
   margin-right: 20px;
 }
-
 
 .footer-nav li:last-child,
 .social-links li:last-child {
@@ -190,9 +190,8 @@ h1 {
   color: #888;
 }
 
-
 .footer-nav li a:hover,
-.footer-nav li a:active{
+.footer-nav li a:active {
   color: #ddd;
 }
 
@@ -201,47 +200,22 @@ h1 {
   font-size: 180%;
 }
 
-
 footer p {
   color: #888;
   text-align: center;
   font-size: 90%;
   margin-top: 30px;
-
 }
 
-
-
-/* @media screen and (min-width: 320px) {
-  .main-container {
-    width: 850px !important;
-  }
-  p {
-    font-size: 1.25rem;
-  }
- .box1 button{
-    position: relative;
-    left: 100px;
+@media screen and (max-width: 320px) {
+ h1 {
+   width: 200px !important;
  }
- .box2-title{
-  position: absolute;
-  left: 500px;
-  width: 600px;
-
 }
-
-.box3-title {
-  position: relative;
-  
-
-  
-}
-  
-} */
 
 @media screen and (min-width: 800px) {
   p {
     font-size: 1.5rem;
-    line-height: 1.5
+    line-height: 1.5;
   }
 }

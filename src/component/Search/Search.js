@@ -6,6 +6,7 @@ import ShoppingCart from "../../img/shopping-cart.png";
 import top from '../Search/top.png';
 import './Search.css';
 
+
 class Search extends Component {
   constructor() {
     super();
@@ -34,12 +35,68 @@ class Search extends Component {
     }
   }
 
+  // render(){
+  //   return(
+  //     <div>
+  //       <a className="logo" href="#">
+  //       {/* <img className='logo1' src = {top} alt="logo" /> */}
+  //       LUGAWEAR.
+  //     </a>
+
+  //     <ul className="navbar-nav ">
+  //     <li className="nav-item active">
+
+  //       <Link to="/" className="nav-link">
+  //         {/* <a className="nav-link" href="#"> */}
+  //           HOME <span className="sr-only">(current)</span>
+  //         {/* </a> */}
+  //       </Link>
+  //     </li>
+
+  //     <li className="nav-item active">
+  //       <Link to="/shop">
+  //         <a className="nav-link" href="#">
+  //           SHOP
+  //         </a>
+  //       </Link>
+  //     </li>
+
+  //     <li className="nav-item active">
+  //       <Link to="/category">
+  //         <a className="nav-link" href="#">
+  //           CATEGORY
+  //         </a>
+  //       </Link>
+  //     </li>
+
+  //     <li className="nav-item active">
+  //       <Link to="/login">
+  //         <a className="nav-link " href="#">
+  //           LOGIN
+  //         </a>
+  //       </Link>
+  //     </li>
+
+  //     <li className="nav-item">
+  //       <Link to="/cart">
+  //       <a className="nav-link " href="#">
+  //           CART
+  //         </a>
+  //         {/* <img src={ShoppingCart} height="30x" width="30px" /> */}
+  //       </Link>
+  //     </li>
+  //     </ul>
+  //     </div>
+  //   )
+  // }
+     
   render() {
     return (
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <a className="navbar-brand" href="#">
-           <img className='logo1' src = {top} alt="logo" />
+           {/* <img className='logo1' src = {top} alt="logo" /> */}
+           LUGAWEAR.
           </a>
           <button
             className="navbar-toggler"
@@ -56,12 +113,14 @@ class Search extends Component {
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav mx-auto mt-2 mt-lg-0">
               <li className="nav-item active">
+
                 <Link to="/" className="nav-link">
                   {/* <a className="nav-link" href="#"> */}
                     HOME <span className="sr-only">(current)</span>
                   {/* </a> */}
                 </Link>
               </li>
+
               <li className="nav-item active">
                 <Link to="/shop">
                   <a className="nav-link" href="#">
@@ -69,6 +128,7 @@ class Search extends Component {
                   </a>
                 </Link>
               </li>
+
               <li className="nav-item active">
                 <Link to="/category">
                   <a className="nav-link" href="#">
@@ -76,18 +136,26 @@ class Search extends Component {
                   </a>
                 </Link>
               </li>
+
               <li className="nav-item active">
                 <Link to="/login">
-                  <a className="nav-link disabled" href="#">
+                  <a className="nav-link " href="#">
                     LOGIN
                   </a>
                 </Link>
               </li>
+
               <li className="nav-item">
                 <Link to="/cart">
-                  <img src={ShoppingCart} height="30x" width="30px" />
+                <a className="nav-link " href="#">
+                    CART
+                  </a>
+                  {/* <img src={ShoppingCart} height="30x" width="30px" /> */}
                 </Link>
               </li>
+
+               
+
             </ul>
 
             {/* //<a  className="nav-link disabled" href="#">CART</a> */}

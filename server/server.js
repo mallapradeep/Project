@@ -13,36 +13,9 @@ const search_controller = require("./controllers/search_controller");
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 const nodemailer = require("nodemailer");
- const path = require("path");
-
+const path = require("path");
 
 ///-------NODEMAILER---------/////
-
-// const nodemailer = require("nodemailer");
-// const path = require("path");
-
-// var transporter = nodemailer.createTransport({
-//   service: "Gmail",
-//   auth: {
-//     user: process.env.GMAIL_USER,
-//     pass: process.env.GMAIL_PASS
-//   }
-// });
-
-// let mailOptions = {
-//   from: '"Pradeep Malla" <mallap2045@gmail.com>',
-//   to: "mallapradeep88@gmail.com",
-//   subject: "Hello World!!!",
-//   text: "ORDER CONFIRMED",
-//   html: "<h1>Thank you for Shopping</h1>"
-// };
-// transporter.sendMail(mailOptions, (error, info) => {
-//   if (error) {
-//     return console.log(error);
-//   }
-//   console.log("The message was sent!");
-//   console.log(info);
-// });
 
 /////////////--------------////////////////////
 
@@ -50,7 +23,7 @@ const nodemailer = require("nodemailer");
 const app = express();
 app.use(bodyParser.json());
 
- app.use( express.static( `${__dirname}/../build` ) );
+app.use(express.static(`${__dirname}/../build`));
 
 //destructure from process.env
 const {
@@ -100,7 +73,7 @@ app.post(`/api/accountInfo`, cart_controller.save);
 
 //checkout
 app.post(`/api/checkout`, cart_controller.handlePayment); //show products at chkout
-app.delete('/api/deleteCart', cart_controller.clearCart);
+app.delete("/api/deleteCart", cart_controller.clearCart);
 
 //category
 app.get("/api/products/tops", products.getTops);
@@ -200,101 +173,38 @@ app.listen(SERVER_PORT, () => {
   console.log(process.env.GMAIL_USER);
 });
 
-/////////////////////////////////////////////
-
-////NODEMAILER///////////////////////
-
-// const nodemailer = require("nodemailer");
-// const path = require("path");
-
-// app.post("/api/sendEmail", (req, res) => {
-//   let transporter = nodemailer.createTransport({
-//     host: "smtp.gmail.com",
-//     port: 587,
-//     auth: {
-//       user: process.env.GMAIL_USER,
-//       pass: process.env.GMAIL_PASS
-//     },
-//     tls: {
-//       rejectUnauthorized: false
-//     }
-//   });
-//   let { text } = req.body;
-
-//   let mailOptions = {
-//     from: "Pradeep" < "mallap2045@gmail.com",
-//     to: "mallapradeep88@gmail.com",
-//     subject: "Order Confirmed",
-//     text: text
-//   };
-
-//   transporter.sendMail(mailOptions, (error, info) => {
-//     if (error) {
-//       return console.log(error);
-//     }
-
-//     res.render("contact", { msg: "email has been sent" });
-//   });
-// });
-
 ////////////////////////////////////
 
 ////NODEMAILER///////////////////////
 
-
-app.post('/api/send', (req,res)=>{
+app.post("/api/send", (req, res) => {
   let transporter = nodemailer.createTransport({
-      host:'smtp.gmail.com',
-      port:587,
-      auth:{
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASS
-      },
-      tls:{
-          rejectUnauthorized: false
-      }
-  })
-  let{text} = req.body
+    host: "smtp.gmail.com",
+    port: 587,
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS
+    },
+    tls: {
+      rejectUnauthorized: false
+    }
+  });
+  let { text } = req.body;
 
-  let mailOptions= {
-      from: 'LUGAWEAR' <'mallapradeep88@gmail.com',
-      to: 'mallap2045@gmail.com',
-      subject: 'Order Confirmed',
-      text: text
-  }
+  let mailOptions = {
+    from: "LUGAWEAR" < "mallapradeep88@gmail.com",
+    to: "mallap2045@gmail.com",
+    subject: "Order Confirmed",
+    text: text
+  };
 
-  transporter.sendMail(mailOptions, (error,info)=>{
-      if(error){
-          return console.log(error)
-      }
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return console.log(error);
+    }
 
-      res.render('contact', {msg: 'email has been sent'})
-  })
-})
+    res.render("contact", { msg: "email has been sent" });
+  });
+});
 
- ////////////////////////////////////////
- 
-//  app.post('/api/send', (req,res)=>{
-// var transporter = nodemailer.createTransport({
-//     service: 'Gmail',
-//     auth: {
-//         user: 'mallap2045@gmail.com',
-//         pass: 'salamnamaste'
-//     }
-// });
-
-// console.log('created.................................');
-// transporter.sendMail({
-// from: 'mallap2045@gmail.com',
-//   to: 'mallapradeep88@gmail.com',
-//   subject: 'hello world!',
-//   text: 'hello world!'
-// });
-//   transporter.sendMail(mailOptions, (error,info)=>{
-//           if(error){
-//               return console.log(error)
-//           }
-   
-//           res.render('contact', {msg: 'email has been sent'})
-//       })
-//  })
+////////////////////////////////////////

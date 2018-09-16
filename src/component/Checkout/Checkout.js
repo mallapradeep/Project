@@ -4,6 +4,7 @@ import axios from "axios";
 import Thankyou from '../Thankyou/Thankyou';
 import './Checkout.css';
 import { connect } from "react-redux";
+import logo from '../Checkout/logo.png';
 
 
 class Checkout extends Component {
@@ -32,9 +33,9 @@ class Checkout extends Component {
         <h4>Total: ${this.props.totalCost}</h4>
     
       <StripeCheckout
-        name="LUGAWEAR"
-        description="Thank you for your purchase"
-        image="http://via.placeholder.com/100x100"
+        name="LUGAWEAR."
+        description="Quality assured"
+        image={logo}
         token={this.onToken}
         stripeKey={process.env.REACT_APP_STRIPE_KEY}
         amount={this.props.totalCost*100}
